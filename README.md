@@ -12,7 +12,7 @@ yarn install
    Here are some useful links:
 
 -   Get a [Google API Key][1]
--   Get a [Open Weather Map API Key][2]
+-   Get an [Open Weather Map API Key][2]
 
 3. Open up a terminal and run the webpack-dev-server using:
 

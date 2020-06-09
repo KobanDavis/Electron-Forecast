@@ -1,0 +1,46 @@
+@import '~variables';
+
+.wrapper {
+	user-select: none;
+	padding: 0.5rem;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	-webkit-app-region: drag;
+	box-shadow: 0px 0px 8px 0px black;
+}
+
+.button {
+	cursor: pointer;
+	-webkit-app-region: no-drag;
+	outline: none;
+	border: none;
+	padding: 0.5rem;
+	display: flex;
+	transition: fill 0.3s ease;
+	fill: @color-sub;
+	&:hover {
+		&.minus {
+			fill: @color-primary;
+		}
+		&.close {
+			fill: @color-danger;
+		}
+	}
+}
+
+.buttons {
+	display: flex;
+}
+
+.title {
+	display: flex;
+	align-items: center;
+	color: @color-primary;
+	padding-left: 0.5rem;
+}
+
+.name {
+	padding-right: 0.5rem;
+}

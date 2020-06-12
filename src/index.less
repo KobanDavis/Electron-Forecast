@@ -11,6 +11,23 @@ div {
 
 body {
 	margin: 0;
-	overflow: hidden;
+	overflow-x: hidden;
 	background-color: @color-bg;
+}
+
+&::-webkit-scrollbar {
+	display: unset;
+	cursor: pointer;
+	width: 0.25rem;
+	height: 0.25rem;
+	&-track {
+		background: transparent;
+	}
+	&-thumb {
+		border-radius: 0.25rem;
+		background-color: #cecece;
+		&:hover {
+			background-color: #bebebe;
+		}
+	}
 }

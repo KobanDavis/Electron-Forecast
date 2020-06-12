@@ -1,9 +1,7 @@
 import React, { FC, useEffect, useState } from 'react'
-import { TitleBar } from './components'
+import { TitleBar, Loading, DailyWeather } from './components'
 import styles from './index.module.less'
 import { useUserLocation } from './providers/UserLocationProvider'
-import Loading from './components/Loading'
-import HourlyWeather from './components/HourlyWeather'
 
 const getUserPosition = (): Promise<Position> => {
 	return new Promise((resolve, reject) => {
@@ -46,7 +44,7 @@ const App: FC = () => {
 			<TitleBar />
 			{userLocation ? (
 				<div className={styles.content}>
-					<HourlyWeather />
+					<DailyWeather />
 				</div>
 			) : (
 				<Loading size={2} />

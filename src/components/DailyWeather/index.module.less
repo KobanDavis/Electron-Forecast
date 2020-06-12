@@ -1,0 +1,46 @@
+@import '~variables';
+
+.wrapper {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+
+	gap: 1.5rem;
+}
+
+.card {
+	justify-self: center;
+	> * {
+		padding: 1rem;
+	}
+	width: 100%;
+	color: @color-primary;
+	max-width: 360px;
+	min-width: 300px;
+	background-color: darken(@color-bg, 3%);
+	border-radius: 1rem;
+}
+
+.weather {
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
+}
+
+.description {
+	border-top: darken(@color-bg, 10%) 1px solid;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.temp {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	font-size: 1rem;
+}
+
+.day {
+	font-size: 4rem;
+	letter-spacing: -6px;
+}

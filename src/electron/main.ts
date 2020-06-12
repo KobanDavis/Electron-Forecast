@@ -1,4 +1,4 @@
-import { app, BrowserWindow } from 'electron'
+import { app, BrowserWindow, webFrame } from 'electron'
 import path from 'path'
 import url from 'url'
 
@@ -8,10 +8,10 @@ let mainWindow: Electron.BrowserWindow | null
 
 const createWindow = (): void => {
 	mainWindow = new BrowserWindow({
-		minWidth: 500,
-		minHeight: 200,
-		width: 800,
-		height: 600,
+		minWidth: 400,
+		minHeight: 274,
+		width: 400,
+		height: 274,
 		frame: false,
 		backgroundColor: '#323437',
 		webPreferences: {
@@ -29,6 +29,7 @@ const createWindow = (): void => {
 				slashes: true,
 			})
 		)
+		webFrame.setVisualZoomLevelLimits(1, 1)
 	}
 
 	mainWindow.on('closed', () => {

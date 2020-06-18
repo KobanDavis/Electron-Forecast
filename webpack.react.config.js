@@ -1,5 +1,6 @@
 const path = require('path')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+const HtmlWebPackPlugin = require('html-webpack-plugin')
+const MomentLocalesPlugin = require('moment-locales-webpack-plugin')
 
 module.exports = {
 	resolve: {
@@ -58,7 +59,7 @@ module.exports = {
 		],
 	},
 	devServer: {
-		contentBase: path.join(__dirname, '../dist/renderer'),
+		contentBase: path.join(__dirname, './dist/renderer'),
 		historyApiFallback: true,
 		compress: true,
 		hot: true,
@@ -66,9 +67,15 @@ module.exports = {
 		publicPath: '/',
 	},
 	output: {
-		path: path.resolve(__dirname, '../dist/renderer'),
-		filename: 'js/[name].js',
+		path: path.resolve(__dirname, './dist/react'),
+		filename: '[name].js',
 		publicPath: './',
 	},
-	plugins: [new HtmlWebpackPlugin()],
+	plugins: [
+		new MomentLocalesPlugin(),
+		new HtmlWebPackPlugin({
+			template: './src/index.html',
+			filename: './index.html',
+		}),
+	],
 }

@@ -1,35 +1,44 @@
-import { app, BrowserWindow, webFrame } from 'electron'
+import { app, BrowserWindow } from 'electron'
 import path from 'path'
 import url from 'url'
 
-require('dotenv').config()
+const root = process.cwd()
+const isDev = process.env.NODE_ENV === 'development'
+const paths = {
+	root,
+	asar: path.resolve(root, './resources/app.asar')
+}
+
+require('dotenv').config(isDev ? undefined : { path: path.resolve(paths.asar, './.env') })
 
 let mainWindow: Electron.BrowserWindow | null
 
+const rem = 16 // (px)
+const cardHeight = 200
+const height = 3 * rem + 2 * rem + cardHeight
 const createWindow = (): void => {
 	mainWindow = new BrowserWindow({
 		minWidth: 400,
-		minHeight: 274,
+		minHeight: height,
 		width: 400,
-		height: 274,
+		height,
 		frame: false,
 		backgroundColor: '#323437',
 		webPreferences: {
-			nodeIntegration: true,
-		},
+			nodeIntegration: true
+		}
 	})
 
-	if (process.env.NODE_ENV === 'development') {
-		mainWindow.loadURL(`http://localhost:4000`)
+	if (isDev) {
+		mainWindow.loadURL(`http://localhost:4000/?${process.env.NODE_ENV}`)
 	} else {
 		mainWindow.loadURL(
 			url.format({
-				pathname: path.join(__dirname, './index.html'),
+				pathname: path.resolve(process.cwd(), './resources/app.asar/dist/react/index.html'),
 				protocol: 'file:',
-				slashes: true,
+				slashes: true
 			})
 		)
-		webFrame.setVisualZoomLevelLimits(1, 1)
 	}
 
 	mainWindow.on('closed', () => {

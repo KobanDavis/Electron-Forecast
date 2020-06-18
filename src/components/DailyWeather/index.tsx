@@ -6,29 +6,34 @@ import { useUserLocation } from '../../providers/UserLocationProvider'
 import { DailyWeatherResponse } from '../../types'
 import styles from './index.module.less'
 import { Cloudy } from '../../assets/icons/Weather'
+// import { useBreakpoints } from '../../hooks'
+import Loading from '../Loading'
 
 interface HourlyWeatherProps {}
 
-const HourlyWeather: FC<HourlyWeatherProps> = () => {
+const DailyWeather: FC<HourlyWeatherProps> = () => {
 	const [userLocation] = useUserLocation()
-	const [hourlyWeather, setHourlyWeather] = useState<DailyWeatherResponse>(null)
+	// const breakpoints = useBreakpoints()
+
+	const [dailyWeather, setDailyWeather] = useState<DailyWeatherResponse>(null)
+
 	useEffect(() => {
 		const init = async (): Promise<void> => {
 			const weather = await weatherService.getDailyWeather(
 				userLocation.coords.latitude,
 				userLocation.coords.longitude
 			)
-			setHourlyWeather(weather)
+			setDailyWeather(weather)
 			// Refresh hourly
 			setTimeout(init, 3600000)
 		}
 
 		init()
 	}, [])
-	console.log(hourlyWeather)
-	return hourlyWeather ? (
+
+	return dailyWeather ? (
 		<div className={styles.wrapper}>
-			{hourlyWeather.daily.map((item, i) => (
+			{dailyWeather.daily.map((item, i) => (
 				<div className={styles.card} key={i}>
 					<div className={styles.weather}>
 						<Cloudy />
@@ -46,7 +51,9 @@ const HourlyWeather: FC<HourlyWeatherProps> = () => {
 				</div>
 			))}
 		</div>
-	) : null
+	) : (
+		<Loading size={4} />
+	)
 }
 
-export default HourlyWeather
+export default DailyWeather
